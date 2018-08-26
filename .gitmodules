@@ -1,0 +1,3 @@
+[submodule "resources/assets/amado"]
+	path = resources/assets/amado
+	url = git@github.com:chepe263/amado.git
