@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/amado', function () {
+    return view('layouts.front');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
