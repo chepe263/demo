@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ App::getLocale() }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
  
     <!-- Title  -->
@@ -27,6 +28,10 @@
 </head>
 
 <body>
+ <div  id="frontApp">        
+                
+            
+            
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-100">
         <div class="search-close">
@@ -87,11 +92,17 @@
                 @if(!Auth::check())
                     <a href="{{ route('login') }}" class="btn amado-btn mb-15">@lang('login') </a>
                 @endif
+                @if(Auth::check())
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    {{ csrf_field() }}
+                    <button type="submit" href="{{ route('logout') }}" class="btn amado-btn mb-15">@lang('logout') </button>
+                </form>
+                @endif
                 @if(false)<a href="#" class="btn amado-btn active">New this week</a>@endif
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">              
-                <a href="{{ route('cart.show') }}" class="cart-nav"><img src="/images/core-img/cart.png" alt=""> @lang('cart') <span class="cart_item_count">( {{ Cart::itemCount() }} )</span></a>
+                <a href="{{ route('cart.show') }}" class="cart-nav"><img src="/images/core-img/cart.png" alt=""> @lang('cart') <span class="cart_item_count" data-amount=" {{ Cart::itemCount() }}">( @{{ hannna.cart.items.length }} )</span></a>
                 @if(false)
                     <a href="#" class="hidden fav-nav"><img src="/images/core-img/favorites.png" alt=""> Favourite</a>
                     <a href="#" class="hidden search-nav"><img src="/images/core-img/search.png" alt=""> Search</a>
@@ -159,7 +170,7 @@
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
+Copyright &copy;@{{ current_year }} All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     </div>
                 </div>
@@ -172,13 +183,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="{{ route('shop.index') }}"">@lang('start')</a>
+                                        <li class="nav-item @if(Route::currentRouteName() == "shop.index") active @endif">
+                                            <a class="nav-link" href="{{ route('shop.index') }}">@lang('start')</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item @if(Route::currentRouteName() == "cart.show") active @endif">
                                             <a class="nav-link" href="{{ route('cart.show') }}">@lang('cart')</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item @if(Route::currentRouteName() == "checkout.show") active @endif" v-if="hannna.cart.hasItems">
                                             <a class="nav-link" href="{{ route('checkout.show') }}">@lang('checkout')</a>
                                         </li>
                                     </ul>
@@ -190,17 +201,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
+</div>
     <!-- ##### Footer Area End ##### -->
     <script>
         hannna = {
-            cart: {
-                items: {{Cart::itemCount()}}
-            }
+            "csrf-token":"{{ csrf_token() }}"
+            ,cart: {!! $cart !!}
         }
     </script>
 
     <!-- app js -->
     <script src="/js/amado.min.js"></script>
+    <script src="/js/app.front.js"></script>
 
 </body>
 

@@ -32,10 +32,10 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if ($this->guard()->user()->type->isAdmin()) {
+        /*if ($this->guard()->user()->type->isAdmin()) {
             return config('konekt.app_shell.ui.url');
-        }
+        }*/
 
-        return '/home';
+        return '/';
     }
 }

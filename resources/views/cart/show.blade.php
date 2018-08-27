@@ -9,10 +9,16 @@
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class="cart-title mt-50">
-                        <h2>Shopping Cart</h2>
+                        <h2>@lang("cart")</h2>
                     </div>
+                    @if(Cart::isEmpty())
+                        <h1>
+                            @lang("the cart is empty")
+                        </h1>
+                    @else
 
                     <div class="cart-table clearfix">
+
                         <table class="table table-responsive">
                             <thead>
                                 <tr>
@@ -52,10 +58,11 @@
                             </tbody>
                         </table>
                     </div>
+                    @endif
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="cart-summary">
-                        <h5>Cart Total</h5>
+                        <h5>@lang("cart total")</h5>
                         <ul class="summary-table">
                             <li><span>@lang("subtotal"):</span> <span>{{ format_price(Cart::total()) }}</span></li>
                             <li><span>@lang("delivery"):</span> <span>@lang("free")</span></li>
