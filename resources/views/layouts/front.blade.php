@@ -9,7 +9,13 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
  
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Home</title>
+    <title>
+        @hasSection('title')
+            @yield('title') - {{ env('APP_NAME')}}
+        @else
+         **{{ env('APP_NAME')}}**
+        @endif
+    </title>
 
     <!-- Favicon  -->
     <link rel="icon" href="/images/core-img/favicon.ico">
@@ -48,7 +54,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="/logo-hannna.png" alt=""></a>
+                <a href="index.html"><img src="/images/logo-hannna.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -69,163 +75,52 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="checkout.html">Admin</a></li>
+                    <li class="@if(Route::currentRouteName() == "shop.index") active @endif"><a href="{{ route('shop.index') }}">@lang('start')</a></li>
+                    <li class="@if(Route::currentRouteName() == "checkout.show") active @endif "><a href="{{ route('checkout.show') }}">@lang('checkout')</a></li>
+                    @if(Auth::check() && Auth::user()->hasRole('admin'))
+                        <li><a href="/admin/product">@lang('admin')</a></li>
+                    @endif
                 </ul>
             </nav>
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
                 @if(!Auth::check())
-                    <a href="#" class="btn amado-btn mb-15">@lang('login')</a>
+                    <a href="{{ route('login') }}" class="btn amado-btn mb-15">@lang('login') </a>
                 @endif
-                <a href="#" class="btn amado-btn active">New this week</a>
+                @if(false)<a href="#" class="btn amado-btn active">New this week</a>@endif
             </div>
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="/images/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="/images/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="/images/core-img/search.png" alt=""> Search</a>
+            <div class="cart-fav-search mb-100">              
+                <a href="{{ route('cart.show') }}" class="cart-nav"><img src="/images/core-img/cart.png" alt=""> @lang('cart') <span class="cart_item_count">( {{ Cart::itemCount() }} )</span></a>
+                @if(false)
+                    <a href="#" class="hidden fav-nav"><img src="/images/core-img/favorites.png" alt=""> Favourite</a>
+                    <a href="#" class="hidden search-nav"><img src="/images/core-img/search.png" alt=""> Search</a>
+                @endif
             </div>
-            <!-- Social Button -->
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
+            @if(false)
+                <!-- Social Button -->
+                <div class="social-info d-flex justify-content-between">
+                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+            @endif
         </header>
         <!-- Header Area End -->
-
-        <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix">
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
+        <!-- Alert -->
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/2.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Minimalistic Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/3.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/4.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Night Stand</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/5.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $18</p>
-                            <h4>Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/6.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $320</p>
-                            <h4>Small Table</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/7.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Metallic Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/8.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Modern Rocking Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="/images/bg-img/9.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Home Deco</h4>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- Product Catagories Area End -->
+            @endif
+        <!-- Alert -->
+        <!-- Page content -->
+        @yield("content")
+        <!-- Page content -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-
+@if(false)
     <!-- ##### Newsletter Area Start ##### -->
     <section class="newsletter-area section-padding-100-0">
         <div class="container">
@@ -250,7 +145,7 @@
         </div>
     </section>
     <!-- ##### Newsletter Area End ##### -->
-
+@endif
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
         <div class="container">
@@ -278,19 +173,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="{{ route('shop.index') }}"">@lang('start')</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
+                                            <a class="nav-link" href="{{ route('cart.show') }}">@lang('cart')</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">Checkout</a>
+                                            <a class="nav-link" href="{{ route('checkout.show') }}">@lang('checkout')</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -302,6 +191,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
+    <script>
+        hannna = {
+            cart: {
+                items: {{Cart::itemCount()}}
+            }
+        }
+    </script>
 
     <!-- app js -->
     <script src="/js/amado.min.js"></script>

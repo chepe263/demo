@@ -1,6 +1,6 @@
 {
-    "name": "vanilo/demo",
-    "description": "Vanilo Demo Application",
+    "name": "chepe263/hannna",
+    "description": "Webstore for FLowerShop Hannna",
     "keywords": ["vanilo", "laravel", "ecommerce"],
     "license": "MIT",
     "type": "project",
@@ -54,5 +54,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

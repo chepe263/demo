@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Vanilo\Product\Contracts\Product;
+//use \App\Product;
 use Vanilo\Product\Models\ProductProxy;
 
 class ShopController extends Controller
@@ -16,6 +17,7 @@ class ShopController extends Controller
 
     public function product(Product $product)
     {
+        //dd($product->getMedia());
         return view('shop.product', ['product' => $product]);
     }
 }

@@ -10,23 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'ShopController@index')->name('shop.index');
+Route::get('product/{product}', 'ShopController@product')->name('shop.product');
+
+//Route::group(['prefix' => '', 'as' => 'shop.'], function() {});
 
 Route::get('/amado', function () {
     return view('layouts.front');
 });
-
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'shop', 'as' => 'shop.'], function() {
-    Route::get('index', 'ShopController@index')->name('index');
-    Route::get('product/{product}', 'ShopController@product')->name('product');
-});
 
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function() {
     Route::get('show', 'CartController@show')->name('show');

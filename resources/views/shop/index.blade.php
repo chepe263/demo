@@ -1,63 +1,34 @@
-@extends('layouts.app')
+@section('title')
+    @lang("products")
+@stop
+@extends('layouts.front')
 
 @section('content')
-    <style>
-        .product {
-            margin-bottom: 1.35em;
-        }
+    <!-- Product Catagories Area Start -->
+    <div class="products-catagories-area clearfix">
+        <div class="amado-pro-catagory clearfix">
+            
+            @foreach($products as $product)
 
-        .product h5 {
-            margin-bottom: 0;
-        }
-
-        .product a h5 {
-            text-decoration: none;
-        }
-
-        .product img {
-            max-width: 100%;
-            display: block;
-        }
-
-        .product-attrs {
-            margin-top: 0;
-        }
-    </style>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Product List</div>
-
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <div class="row">
-
-                            @foreach($products as $product)
-                                <article class="col-xs-12 col-sm-6 col-md-4 product">
-                                    <a href="{{ route('shop.product', $product) }}">
-                                        @if($product->hasImage())
-                                            <img src="{{ $product->getThumbnailUrl() }}"/>
-                                        @else
-                                            <img src="/images/product.jpg"/>
-                                        @endif
-                                        <h5>{{ $product->name }}</h5>
-                                    </a>
-                                    <div class="product-attrs">
-                                        <span class="price">{{ format_price($product->price) }}</span>
-                                    </div>
-                                </article>
-                            @endforeach
-
-                        </div>
+            <!-- Single Catagory -->
+            <div class="single-products-catagory clearfix">
+                <a href="{{ route('shop.product', $product) }}">
+                    @if($product->hasImage())
+                        <img src="{{ $product->getThumbnailUrl() }}"/>
+                    @else
+                        <img src="/images/product.jpg"/>
+                    @endif
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <p>{{ format_price($product->price) }}</p>
+                        <h4>{{ $product->name }}</h4>
                     </div>
-                </div>
+                </a>
             </div>
+            @endforeach
+
         </div>
     </div>
+    <!-- Product Catagories Area End -->
 @endsection
