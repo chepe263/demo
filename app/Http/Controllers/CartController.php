@@ -10,7 +10,12 @@ class CartController extends Controller
 {
     public function add(Product $product)
     {
-        Cart::addItem($product);
+        $how_many = 1;
+        if(request()->input('quantity') > 1){
+            $how_many = request()->input('quantity');
+        }
+        $how_many = -50;
+        Cart::addItem($product,$how_many);
 
         return redirect()->route('cart.show');
     }

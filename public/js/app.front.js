@@ -46459,9 +46459,39 @@ window.Vue = require('vue');
 var frontApp = new Vue({
     el: '#frontApp',
     data: {
-      message: 'You loaded this page on: ' + new Date().toLocaleString()
-      , hannna: window.hannna
-      ,current_year: new Date().getFullYear() + "!!!"
+        hannna: window.hannna
+      , current_year: new Date().getFullYear()  
+      , add_to_card_items: 1
+      , adding_cart_items: false
+      , added_to_cart: false
+    }
+    ,methods:{
+      add_to_cart:function(e){
+        const url = e.target.action;
+        var self = this;
+        self.adding_cart_items = true;
+        self.added_to_cart = false;
+        /*try {
+          const response = await axios.get(url)
+          //this.posts = response.data
+          console.log(response.data);
+        } catch (e) {
+          this.errors.push(e)
+        }*/
+        var res =  axios.post(url,{
+            quantity: self.add_to_card_items            
+          })
+          .then(response =>{
+            self.hannna.cart.itemCount += self.add_to_card_items;
+            self.add_to_card_items = 1;
+            self.adding_cart_items = false;
+            self.added_to_cart = true;
+            setTimeout(function() {
+              self.added_to_cart = false;
+            }, 1000);
+          } );
+         
+      }
     }
 });
 },{"./bootstrap":34,"vue":32}],34:[function(require,module,exports){

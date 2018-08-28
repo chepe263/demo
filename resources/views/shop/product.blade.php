@@ -85,20 +85,20 @@
                         </div>
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix" method="post" action="{{ route('cart.add', $product) }}">
+                        <form class="cart clearfix" method="post" action="{{ route('cart.add', $product) }}" @submit.prevent="add_to_cart">
                             {{ csrf_field() }}
                             <div class="cart-btn d-flex mb-50">
                                 <p>#</p>
                                 <div class="quantity">
-                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                    <span class="qty-minus" @click="add_to_card_items = Math.max(0, --add_to_card_items)"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                    <input type="number" v-model="add_to_card_items" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                    <span class="qty-plus" @click="++add_to_card_items"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                 </div>
                             </div>
-                            <button type="submit" name="addtocart" value="5" class="btn amado-btn">
+                            <button type="submit" name="addtocart" value="5" class="btn amado-btn" >
                                 @lang("add to cart")
-                                <i class="d-none fa fa-check" id="item_added"></i>
-                                <i class="d-none fa fa-spinner fa-spin fa-fw margin-bottom" id="item_adding"></i>
+                                <i v-if="added_to_cart" class="fa fa-check" id="item_added"></i>
+                                <i v-if="adding_cart_items" class="fa fa-spinner fa-spin fa-fw margin-bottom" id="item_adding"></i>
                             </button>
                         </form>
 

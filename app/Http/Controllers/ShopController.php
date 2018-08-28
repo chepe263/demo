@@ -17,7 +17,6 @@ class ShopController extends Controller
 
     public function product(Product $product)
     {
-        //dd($product->getMedia());
         return view('shop.product', ['product' => $product]);
     }
 }

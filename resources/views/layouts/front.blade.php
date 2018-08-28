@@ -59,7 +59,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="/images/logo-hannna.png" alt=""></a>
+                <a href="/"><img src="/images/logo-hannna.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -75,7 +75,7 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="/images/logo-hannna.png" alt=""></a>
+                <a href="/"><img src="/images/logo-hannna.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
@@ -102,7 +102,7 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">              
-                <a href="{{ route('cart.show') }}" class="cart-nav"><img src="/images/core-img/cart.png" alt=""> @lang('cart') <span class="cart_item_count" data-amount=" {{ Cart::itemCount() }}">( @{{ hannna.cart.items.length }} )</span></a>
+                <a href="{{ route('cart.show') }}" class="cart-nav"><img src="/images/core-img/cart.png" alt=""> @lang('cart') <span class="cart_item_count" data-amount=" {{ Cart::itemCount() }}">( @{{ hannna.cart.itemCount }} )</span></a>
                 @if(false)
                     <a href="#" class="hidden fav-nav"><img src="/images/core-img/favorites.png" alt=""> Favourite</a>
                     <a href="#" class="hidden search-nav"><img src="/images/core-img/search.png" alt=""> Search</a>
@@ -166,7 +166,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="/images/logo-hannna-w.png" alt=""></a>
+                            <a href="/"><img src="/images/logo-hannna-w.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
