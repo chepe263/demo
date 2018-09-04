@@ -17,6 +17,7 @@ window.Vue = require('vue');
  */
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('example-component', require('./compiled_components/components/ExampleComponent.vue'));
 
 var frontApp = new Vue({
     el: '#frontApp',
@@ -31,6 +32,9 @@ var frontApp = new Vue({
       add_to_cart:function(e){
         const url = e.target.action;
         var self = this;
+        if(self.adding_cart_items){
+          return;
+        }
         self.adding_cart_items = true;
         self.added_to_cart = false;
         /*try {

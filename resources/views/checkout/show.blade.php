@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@section('title')
+    @lang("payment info")
+@stop
+@extends('layouts.front')
 
 @section('content')
     <style>
@@ -12,7 +15,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Checkout</div>
+                    <div class="panel-heading"><h1>@lang("payment info")</h1></div>
 
                     <div class="panel-body">
                         @unless ($checkout)
@@ -33,7 +36,7 @@
                                         <label>
                                             <input type="checkbox" name="ship_to_billing_address" value="1"
                                                    v-model="shipToBillingAddress">
-                                            Ship to the same address
+                                            @lang("ship to the same address")
                                         </label>
                                     </div>
                                 </div>
@@ -47,7 +50,7 @@
                                 <hr>
 
                                 <div>
-                                    <button class="btn btn-primary">Submit Order</button>
+                                    <button class="btn btn-primary">@lang("submit order")</button>
                                 </div>
 
 

@@ -1,8 +1,8 @@
-<h3>Billing Address</h3>
+<h3>@lang("billing address")</h3>
 <div class="form-group form-group-sm row{{ $errors->has('billpayer.address.country_id') ? ' has-danger' : '' }}">
-    <label class="form-control-label col-md-2">{{ __('Country') }}</label>
+    <label class="form-control-label col-md-2">{{ __('country') }}</label>
     <div class="col-md-10">
-        {{ Form::select('billpayer[address][country_id]', $countries->pluck('name', 'id'), 'NL', ['class' => 'form-control']) }}
+        {{ Form::select('billpayer[address][country_id]', $countries->pluck('name', 'id'), 'GT', ['class' => 'form-control']) }}
 
         @if ($errors->has('billpayer.address.country_id'))
             <div class="form-control-feedback">{{ $errors->first('billpayer.address.country_id') }}</div>

@@ -91,6 +91,7 @@
             <div class="amado-btn-group mt-30 mb-100">
                 @if(!Auth::check())
                     <a href="{{ route('login') }}" class="btn amado-btn mb-15">@lang('login') </a>
+                    <a href="{{ route('register') }}" class="btn amado-btn mb-15">@lang('register') </a>
                 @endif
                 @if(Auth::check())
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">

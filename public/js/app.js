@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 10);
@@ -11341,6 +11341,8 @@ module.exports = __webpack_require__(39);
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11369,7 +11371,9 @@ window.Vue = __webpack_require__(36);
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {
+
 window._ = __webpack_require__(13);
 
 /**
@@ -11379,7 +11383,9 @@ window._ = __webpack_require__(13);
  */
 
 try {
-  window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
+  if (!window.$) {
+    window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
+  }
 
   __webpack_require__(15);
 } catch (e) {}

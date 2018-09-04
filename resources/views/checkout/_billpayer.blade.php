@@ -1,4 +1,4 @@
-<h3>Bill To</h3>
+<h5>@lang("bill to")</h5>
 
 <div class="row">
     <div class="col-md-6">
@@ -32,14 +32,14 @@
 </div>
 
 
-<div class="form-group form-group-sm{{ $errors->has('type') ? ' has-danger' : '' }}">
+<div class="form-group d-none form-group-sm{{ $errors->has('type') ? ' has-danger' : '' }}">
     <div class="checkbox">
         <label>
             {{ Form::checkbox('billpayer[is_organization]', 1, null, [
                 'v-model' => 'isOrganization'
                 ])
             }}
-            {{ __('Bill to Company') }}
+            {{ __('bill to company') }}
         </label>
     </div>
 

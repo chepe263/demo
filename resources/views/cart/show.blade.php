@@ -25,24 +25,24 @@
                                     <th></th>
                                     <th>@lang('name')</th>
                                     <th>@lang('price')</th>
-                                    <th>@lang('quantity')</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach(Cart::getItems() as $item)
                                 <tr>
                                     <td class="cart_product_img">
-                                        <a href="#"><img src="{{ $item->product->getThumbnailUrl() ?: '/images/product.jpg' }}" alt="{{ $item->product->getName() }}"></a>
+                                        <a href="{{ route('shop.product', $item->product) }}"><img src="{{ $item->product->getThumbnailUrl() ?: '/images/product.jpg' }}" alt="{{ $item->product->getName() }}"></a>
                                     </td>
                                     <td class="cart_product_desc">
-                                        <h5>{{ $item->product->getName() }}</h5>
+                                        <h5><a href="{{ route('shop.product', $item->product) }}">{{ $item->product->getName() }}</a></h5>
                                     </td>
                                     <td class="price">
-                                        <span>{{ format_price($item->price) }}</span>
+                                        <span>{{ format_price($item->price) }} x {{ $item->quantity }}</span>
                                     </td>
                                     <td class="qty">
                                         <div class="qty-btn d-flex">
-                                            <p></p>
+                                            @if(false)
                                             <div class="quantity">
                                                 <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i>
                                                     &nbsp;&nbsp;
@@ -51,6 +51,16 @@
                                                 <input type="number" class="qty-text" id="qty" step="1" min="0" max="10" name="quantity" value="{{ $item->quantity }}">
                                                 <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
+                                            @endif
+
+                                            <form class="d-inline" method="post" action="{{ route('cart.add', $item->product) }}?return=cart" >
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" id="qty" name="quantity" value="{{ $item->quantity * -1 }}">
+                                                    <button type="submit" name="addtocart" value="5" class="btn btn-danger" >
+                                                        @lang("remove from cart")
+                                                    </button>
+                                                </form>
+
                                         </div>
                                     </td>
                                 </tr>

@@ -85,16 +85,19 @@
                         </div>
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix" method="post" action="{{ route('cart.add', $product) }}" @submit.prevent="add_to_cart">
+                        <form class="cart clearfix" method="post" action="{{ route('cart.add', $product) }}" @ submit.prevent="add_to_cart">
                             {{ csrf_field() }}
                             <div class="cart-btn d-flex mb-50">
-                                <p>#</p>
-                                <div class="quantity">
-                                    <span class="qty-minus" @click="add_to_card_items = Math.max(0, --add_to_card_items)"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                    <input type="number" v-model="add_to_card_items" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                @if(false)
+                                <div class="quantity d-none">
+                                        <p>#</p>
+                                    <span class="qty-minus" @click="add_to_card_items = Math.max(1, --add_to_card_items)"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                    <input type="number" v-model="add_to_card_items" class="qty-text" id="qtyq" step="1" min="1" max="300" name="quantityq" value="1">
                                     <span class="qty-plus" @click="++add_to_card_items"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                 </div>
+                                @endif
                             </div>
+                            <input type="hidden" v-model="add_to_card_items" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
                             <button type="submit" name="addtocart" value="5" class="btn amado-btn" >
                                 @lang("add to cart")
                                 <i v-if="added_to_cart" class="fa fa-check" id="item_added"></i>
